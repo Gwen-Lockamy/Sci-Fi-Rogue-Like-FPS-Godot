@@ -1,0 +1,135 @@
+[gd_scene load_steps=12 format=3 uid="uid://bnbhfgsj7t5v2"]
+
+[ext_resource type="Script" uid="uid://bx4up8p5jr838" path="res://world_environment.gd" id="1_fj7yv"]
+[ext_resource type="PackedScene" uid="uid://uh3x773cfq4r" path="res://player.tscn" id="2_fj7yv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tlwt5"]
+albedo_color = Color(0.5294118, 0.15686275, 0.78431374, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aqk2v"]
+albedo_color = Color(0.7372549, 0.101960786, 0.078431375, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_036b0"]
+albedo_color = Color(0.105882354, 0.6627451, 0.8745098, 1)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f3sb7"]
+sky_top_color = Color(0.07058324, 0.054146037, 0.09765625, 1)
+sky_horizon_color = Color(0.51562494, 0.28125, 0.625, 1)
+sky_curve = 0.23537485
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0.6842155, 0.6503084, 0.6862745, 1)
+
+[sub_resource type="Sky" id="Sky_fj7yv"]
+sky_material = SubResource("ProceduralSkyMaterial_f3sb7")
+
+[sub_resource type="Environment" id="Environment_tlwt5"]
+background_mode = 2
+sky = SubResource("Sky_fj7yv")
+tonemap_mode = 2
+tonemap_exposure = 1.2
+ssao_intensity = 16.0
+glow_enabled = true
+glow_bloom = 0.13
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.04322917, 0.029166665, 0.046875, 1)
+fog_density = 1.0
+fog_sky_affect = 0.504
+fog_depth_curve = 0.16493687
+fog_depth_begin = 0.0
+fog_depth_end = 50.0
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.07
+volumetric_fog_albedo = Color(0.29512778, 0.13038537, 0.671875, 1)
+volumetric_fog_anisotropy = 0.59
+volumetric_fog_detail_spread = 0.5
+volumetric_fog_ambient_inject = 0.83
+volumetric_fog_sky_affect = 0.688
+adjustment_enabled = true
+adjustment_brightness = 1.1
+adjustment_saturation = 1.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fj7yv"]
+albedo_color = Color(0.99607843, 0.50980395, 0.7647059, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fj7yv"]
+lifetime_randomness = 0.5
+emission_shape_offset = Vector3(0, 0, -5)
+emission_shape = 3
+emission_box_extents = Vector3(15, 8, 25)
+direction = Vector3(0, -1, 0)
+spread = 164.84
+flatness = 1.0
+turbulence_enabled = true
+turbulence_noise_strength = 4.58
+turbulence_noise_scale = 4.136
+turbulence_noise_speed_random = 0.63
+turbulence_influence_min = 0.256
+turbulence_influence_max = 0.37
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_f3sb7"]
+size = Vector3(0.05, 0.05, 0.05)
+
+[node name="World" type="Node3D"]
+
+[node name="Enviornment" type="Node3D" parent="."]
+
+[node name="Small Box" type="CSGBox3D" parent="Enviornment"]
+transform = Transform3D(2, 0, 0, 0, 1.5, 0, 0, 0, 6, 14.9, 0.81758094, 0)
+use_collision = true
+material = SubResource("StandardMaterial3D_tlwt5")
+
+[node name="Medium Box" type="CSGBox3D" parent="Enviornment"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 14, 1.5, 6)
+use_collision = true
+material = SubResource("StandardMaterial3D_aqk2v")
+
+[node name="Large Box" type="CSGBox3D" parent="Enviornment"]
+transform = Transform3D(7.24455, 0, -2.120997, 0, 4, 0, 3.3935952, 0, 4.527844, 11.843324, 2, -8.429459)
+use_collision = true
+material = SubResource("StandardMaterial3D_036b0")
+
+[node name="Large Box2" type="CSGBox3D" parent="Enviornment"]
+transform = Transform3D(-0.26950026, 0, -10.653911, 0, 0.6420366, 0, 18.447025, 0, -0.15564728, 11.7069645, 4.271232, -8.164376)
+use_collision = true
+material = SubResource("StandardMaterial3D_036b0")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Enviornment"]
+environment = SubResource("Environment_tlwt5")
+script = ExtResource("1_fj7yv")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Enviornment"]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 6, 23, 0)
+light_color = Color(1, 0.99723786, 0.98895144, 1)
+light_energy = 0.773
+light_indirect_energy = 0.433
+light_angular_distance = 3.0
+shadow_enabled = true
+directional_shadow_fade_start = 0.566
+directional_shadow_max_distance = 15.7
+
+[node name="Floor" type="CSGBox3D" parent="Enviornment"]
+transform = Transform3D(200, 0, 0, 0, 0.2, 0, 0, 0, 200, 0.0013797879, 1.0153818, -0.0034861565)
+use_collision = true
+material = SubResource("StandardMaterial3D_fj7yv")
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("2_fj7yv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4482307, 0)
+
+[node name="Enviornment Particles" type="GPUParticles3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.4482307, 0)
+amount = 360
+lifetime = 2.5
+speed_scale = 0.5
+randomness = 0.8
+draw_order = 3
+trail_lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_fj7yv")
+draw_pass_1 = SubResource("BoxMesh_f3sb7")
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="CharacterBody3D/Enviornment Particles"]
+transform = Transform3D(2.0902867, 0, 0, 0, 1, 0, 0, 0, 2.4295232, 0, 0.43132687, 0)
+size = Vector3(10, 1, 10)

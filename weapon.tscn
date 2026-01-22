@@ -1,0 +1,85 @@
+[gd_scene load_steps=6 format=3 uid="uid://chw7fyt3b1luy"]
+
+[ext_resource type="PackedScene" uid="uid://cr4c7ndu8laxd" path="res://SM_SciFi_Weapons_01.fbx" id="1_swcir"]
+
+[sub_resource type="Animation" id="Animation_8xwfw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SM_SciFi_Weapons_01:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SM_SciFi_Weapons_01:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 3.1415927, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_o2wld"]
+resource_name = "Shoot"
+length = 0.1
+step = 0.01
+
+[sub_resource type="Animation" id="Animation_swcir"]
+resource_name = "shoot"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SM_SciFi_Weapons_01:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0316148, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.040082514), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SM_SciFi_Weapons_01:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.03246925, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 3.1415927, 0), Vector3(-0.008726646, 3.1415927, 0), Vector3(0, 3.1415927, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3fy1u"]
+_data = {
+&"RESET": SubResource("Animation_8xwfw"),
+&"Shoot": SubResource("Animation_o2wld"),
+&"shoot": SubResource("Animation_swcir")
+}
+
+[node name="Weapon" type="Node3D"]
+
+[node name="SM_SciFi_Weapons_01" parent="." instance=ExtResource("1_swcir")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SM_SciFi_Weapons_01"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_3fy1u")
+}
+
+[node name="RayCast3D" type="RayCast3D" parent="SM_SciFi_Weapons_01"]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0.156, 0.594)
+target_position = Vector3(0, 0, -1)
