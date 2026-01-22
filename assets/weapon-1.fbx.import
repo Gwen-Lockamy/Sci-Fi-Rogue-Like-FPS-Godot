@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://cr4c7ndu8laxd"
-path="res://.godot/imported/SM_SciFi_Weapons_01.fbx-e8ef2ee8c9bae00054a9802445c3736a.scn"
+path="res://.godot/imported/weapon-1.fbx-64942e9e7c2b191a77da0692595e1aff.scn"
 
 [deps]
 
-source_file="res://SM_SciFi_Weapons_01.fbx"
-dest_files=["res://.godot/imported/SM_SciFi_Weapons_01.fbx-e8ef2ee8c9bae00054a9802445c3736a.scn"]
+source_file="res://assets/weapon-1.fbx"
+dest_files=["res://.godot/imported/weapon-1.fbx-64942e9e7c2b191a77da0692595e1aff.scn"]
 
 [params]
 

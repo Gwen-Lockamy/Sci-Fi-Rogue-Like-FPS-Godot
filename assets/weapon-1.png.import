@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c8yxosl0n88wg"
-path.s3tc="res://.godot/imported/shaded.png-8e4db017d3f84535ed59064a4cc17e41.s3tc.ctex"
+uid="uid://ddy47pqtny8ie"
+path.s3tc="res://.godot/imported/weapon-1.png-88836a5a7418bf34460ce61c1574b1ba.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://shaded.png"
-dest_files=["res://.godot/imported/shaded.png-8e4db017d3f84535ed59064a4cc17e41.s3tc.ctex"]
+source_file="res://assets/weapon-1.png"
+dest_files=["res://.godot/imported/weapon-1.png-88836a5a7418bf34460ce61c1574b1ba.s3tc.ctex"]
 
 [params]
 

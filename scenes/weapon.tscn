@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://chw7fyt3b1luy"]
 
-[ext_resource type="PackedScene" uid="uid://cr4c7ndu8laxd" path="res://SM_SciFi_Weapons_01.fbx" id="1_swcir"]
+[ext_resource type="PackedScene" uid="uid://cr4c7ndu8laxd" path="res://assets/weapon-1.fbx" id="1_swcir"]
 
 [sub_resource type="Animation" id="Animation_8xwfw"]
 length = 0.001

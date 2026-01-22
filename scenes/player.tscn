@@ -1,8 +1,8 @@
 [gd_scene load_steps=20 format=3 uid="uid://uh3x773cfq4r"]
 
-[ext_resource type="Script" uid="uid://7wpmp33l0bgs" path="res://Player.gd" id="1_onrkg"]
-[ext_resource type="PackedScene" uid="uid://c1hr1cfxqry7" path="res://blaster.tscn" id="2_onrkg"]
-[ext_resource type="AudioStream" uid="uid://da7o5tiemhg7d" path="res://step.mp3" id="3_i3pqv"]
+[ext_resource type="Script" uid="uid://7wpmp33l0bgs" path="res://scripts/Player.gd" id="1_onrkg"]
+[ext_resource type="PackedScene" uid="uid://c1hr1cfxqry7" path="res://scenes/blaster.tscn" id="2_onrkg"]
+[ext_resource type="AudioStream" uid="uid://da7o5tiemhg7d" path="res://assets/footstep.mp3" id="3_i3pqv"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4flbx"]
 
@@ -188,64 +188,6 @@ tracks/13/keys = {
 [sub_resource type="Animation" id="Animation_sweqy"]
 resource_name = "in_air"
 
-[sub_resource type="Animation" id="Animation_onrkg"]
-resource_name = "sway"
-length = 0.8
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Head/Camera3D/WeaponRig:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0.07049465, -0.24352318, -0.2280075), Vector3(0.06, -0.24, -0.228), Vector3(0.05, -0.244, -0.228), Vector3(0.06, -0.24, -0.228), Vector3(0.07, -0.244, -0.228)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Head/Camera3D/WeaponRig:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Head/Camera3D/Arms:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.20016107, 0.40089402, 0.59935534, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(-0.17140582, -0.27315143, -0.41556716), Vector3(-0.181, -0.263, -0.416), Vector3(-0.187, -0.273, -0.416), Vector3(-0.177, -0.263, -0.416), Vector3(-0.171, -0.273, -0.416)]
-}
-tracks/3/type = "method"
-tracks/3/imported = false
-tracks/3/enabled = false
-tracks/3/path = NodePath("Step")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0.4, 0.8),
-"transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": [0.0],
-"method": &"play"
-}, {
-"args": [0.0],
-"method": &"play"
-}]
-}
-
 [sub_resource type="Animation" id="Animation_2hs0m"]
 resource_name = "shoot"
 length = 0.4
@@ -398,6 +340,64 @@ tracks/3/keys = {
 "values": []
 }
 
+[sub_resource type="Animation" id="Animation_onrkg"]
+resource_name = "sway"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head/Camera3D/WeaponRig:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.07049465, -0.24352318, -0.2280075), Vector3(0.06, -0.24, -0.228), Vector3(0.05, -0.244, -0.228), Vector3(0.06, -0.24, -0.228), Vector3(0.07, -0.244, -0.228)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Head/Camera3D/WeaponRig:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Head/Camera3D/Arms:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.20016107, 0.40089402, 0.59935534, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.17140582, -0.27315143, -0.41556716), Vector3(-0.181, -0.263, -0.416), Vector3(-0.187, -0.273, -0.416), Vector3(-0.177, -0.263, -0.416), Vector3(-0.171, -0.273, -0.416)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = false
+tracks/3/path = NodePath("Step")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}, {
+"args": [0.0],
+"method": &"play"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hqtel"]
 _data = {
 &"RESET": SubResource("Animation_i3pqv"),
@@ -468,7 +468,7 @@ skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_onrkg")
 
 [node name="Forearm" type="MeshInstance3D" parent="Head/Camera3D/Arms/Left Arm"]
-transform = Transform3D(0.24737711, -0.92525524, -0.28758982, 0.67918324, 0.3772754, -0.6295818, 0.69102365, -0.03958212, 0.7217474, 0.20853369, 0.06060472, -0.10037905)
+transform = Transform3D(0.24737704, -0.92525524, -0.28758982, 0.67918307, 0.3772754, -0.6295818, 0.69102347, -0.03958212, 0.7217474, 0.20853369, 0.06060472, -0.10037905)
 mesh = SubResource("BoxMesh_onrkg")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_onrkg")
@@ -477,7 +477,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_onrkg")
 transform = Transform3D(0.99776834, 0.016890142, -0.06459777, -0.0114329625, 0.9964056, 0.08393448, 0.06578312, -0.083008684, 0.994376, 0.015785247, -0.050134346, 0.046147734)
 
 [node name="Forearm" type="MeshInstance3D" parent="Head/Camera3D/Arms/Right Arm"]
-transform = Transform3D(0.929964, 0.032764845, 0.36618593, 0.12836497, 0.90440106, -0.4069168, -0.3445115, 0.42542416, 0.83685404, 0.32292378, 0.05914542, 0.19695926)
+transform = Transform3D(0.929964, 0.032764845, 0.3661859, 0.12836497, 0.90440106, -0.40691677, -0.3445115, 0.42542416, 0.83685404, 0.32292378, 0.05914542, 0.19695926)
 mesh = SubResource("BoxMesh_onrkg")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_onrkg")

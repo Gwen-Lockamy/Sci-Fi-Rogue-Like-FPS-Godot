@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bihxqchll0dvs"]
 
-[ext_resource type="Script" uid="uid://csg5paxaroaxc" path="res://blaster_bolt.gd" id="1_fhw0n"]
+[ext_resource type="Script" uid="uid://csg5paxaroaxc" path="res://scripts/blaster_bolt.gd" id="1_84t5p"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_fhw0n"]
 
@@ -9,57 +9,6 @@ albedo_color = Color(0.515625, 0.061424077, 0.11154349, 1)
 emission_enabled = true
 emission = Color(0.9019608, 0, 0.101960786, 1)
 emission_energy_multiplier = 15.78
-
-[sub_resource type="Animation" id="Animation_fhw0n"]
-resource_name = "flight"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MeshInstance3D2:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.20052911, 0.4, 0.6007931, 0.79989684, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, -0.6675283), Vector3(0.03978348, 0, -0.65998954), Vector3(-0.029040229, -0.033136964, -0.57443154), Vector3(-0.015, -0.03, -0.601), Vector3(-0.0002724044, -0.023740768, -0.6005638), Vector3(0, 0, -0.6675283)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("MeshInstance3D:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.20052911, 0.4, 0.6007931, 0.79989684, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0.015815884), Vector3(0.02, 0.02, 0.016), Vector3(-0.014278751, -0.012856524, 0.016), Vector3(0.023355495, -0.044607665, 0.016), Vector3(-0.016136099, -0.02520248, 0.016), Vector3(0, 0, 0.015815884)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("MeshInstance3D2:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.20052911, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [false, true, false]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("MeshInstance3D2:scale")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.20261574, 0.79936075, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0.062, 0.03, 0.11), Vector3(0.062, 0.03, 0.11), Vector3(0, 0, 0)]
-}
 
 [sub_resource type="Animation" id="Animation_qjiqh"]
 length = 0.001
@@ -112,6 +61,57 @@ tracks/3/keys = {
 "values": [Vector3(0, 0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_fhw0n"]
+resource_name = "flight"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.20052911, 0.4, 0.6007931, 0.79989684, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, -0.6675283), Vector3(0.03978348, 0, -0.65998954), Vector3(-0.029040229, -0.033136964, -0.57443154), Vector3(-0.015, -0.03, -0.601), Vector3(-0.0002724044, -0.023740768, -0.6005638), Vector3(0, 0, -0.6675283)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.20052911, 0.4, 0.6007931, 0.79989684, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0.015815884), Vector3(0.02, 0.02, 0.016), Vector3(-0.014278751, -0.012856524, 0.016), Vector3(0.023355495, -0.044607665, 0.016), Vector3(-0.016136099, -0.02520248, 0.016), Vector3(0, 0, 0.015815884)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MeshInstance3D2:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.20052911, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MeshInstance3D2:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.20261574, 0.79936075, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.062, 0.03, 0.11), Vector3(0.062, 0.03, 0.11), Vector3(0, 0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_04w51"]
 _data = {
 &"RESET": SubResource("Animation_qjiqh"),
@@ -119,7 +119,7 @@ _data = {
 }
 
 [node name="Blaster Bolt" type="Node3D"]
-script = ExtResource("1_fhw0n")
+script = ExtResource("1_84t5p")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.07119243, 0, 0, 0, 0.043234956, 0, 0, 0, 0.8000005, 0, 0, 0.015815884)

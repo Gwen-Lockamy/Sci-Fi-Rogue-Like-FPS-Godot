@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://bnbhfgsj7t5v2"]
 
-[ext_resource type="Script" uid="uid://bx4up8p5jr838" path="res://world_environment.gd" id="1_fj7yv"]
-[ext_resource type="PackedScene" uid="uid://uh3x773cfq4r" path="res://player.tscn" id="2_fj7yv"]
+[ext_resource type="Script" uid="uid://bx4up8p5jr838" path="res://scripts/world_environment.gd" id="1_tsgde"]
+[ext_resource type="PackedScene" uid="uid://uh3x773cfq4r" path="res://scenes/player.tscn" id="2_pmfem"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tlwt5"]
 albedo_color = Color(0.5294118, 0.15686275, 0.78431374, 1)
@@ -99,7 +99,7 @@ material = SubResource("StandardMaterial3D_036b0")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Enviornment"]
 environment = SubResource("Environment_tlwt5")
-script = ExtResource("1_fj7yv")
+script = ExtResource("1_tsgde")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Enviornment"]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 6, 23, 0)
@@ -116,7 +116,7 @@ transform = Transform3D(200, 0, 0, 0, 0.2, 0, 0, 0, 200, 0.0013797879, 1.0153818
 use_collision = true
 material = SubResource("StandardMaterial3D_fj7yv")
 
-[node name="CharacterBody3D" parent="." instance=ExtResource("2_fj7yv")]
+[node name="CharacterBody3D" parent="." instance=ExtResource("2_pmfem")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4482307, 0)
 
 [node name="Enviornment Particles" type="GPUParticles3D" parent="CharacterBody3D"]
