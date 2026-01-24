@@ -19,8 +19,7 @@ var base_fov = 85
 var time_bob = 0.0
 
 # Misc
-var bullet = load("res://blaster_bolt.tscn")
-var flash_time = 0.5
+var bullet = load("res://scenes/blaster_bolt.tscn")
 var shoot_blend = 0.0
 var instance
 
@@ -84,13 +83,13 @@ func headbob(time) -> Vector3:
 	return pos
 	
 func handle_shooting(delta):
-	shoot_blend = lerp(shoot_blend, 0.0, delta * 6)
+	shoot_blend = lerp(shoot_blend, 0.0, delta * 4)
 	anim_tree["parameters/Shooting/blend_amount"] = shoot_blend
 	if Input.is_action_pressed("shoot"):
 		if !gun_animation.is_playing():
-			shoot_blend = 1.0
+			shoot_blend = 0.8
 			blaster_sound.pitch_scale = randf_range(0.75, 0.85)
-			gun_animation.play("shoot")
+			gun_animation.play("shoot", -1, 2)
 
 			instance = bullet.instantiate()
 			instance.position = gun_barrel.global_position
@@ -105,7 +104,7 @@ func handle_movement(direction, input_direction, delta):
 		if speed_ratio > 0.1:
 			step_timer += delta
 			if step_timer >= STEP_INTERVAL:
-				footstep_audio.pitch_scale = randf_range(0.4, 0.5)
+				footstep_audio.pitch_scale = randf_range(0.4, 0.55)
 				footstep_audio.play()
 				step_timer = 0.0
 		else:

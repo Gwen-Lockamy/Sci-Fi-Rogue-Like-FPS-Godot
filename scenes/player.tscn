@@ -1,7 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://uh3x773cfq4r"]
+[gd_scene load_steps=23 format=3 uid="uid://uh3x773cfq4r"]
 
 [ext_resource type="Script" uid="uid://7wpmp33l0bgs" path="res://scripts/Player.gd" id="1_onrkg"]
 [ext_resource type="PackedScene" uid="uid://c1hr1cfxqry7" path="res://scenes/blaster.tscn" id="2_onrkg"]
+[ext_resource type="Shader" uid="uid://4l81ajkdl5ux" path="res://scripts/shaders/PS1-PostProcessing.gdshader" id="3_dqkch"]
 [ext_resource type="AudioStream" uid="uid://da7o5tiemhg7d" path="res://assets/footstep.mp3" id="3_i3pqv"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4flbx"]
@@ -13,6 +14,17 @@ size = Vector3(0.1, 0.1, 0.3)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_onrkg"]
 albedo_color = Color(0, 0.13522655, 0.27734375, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_dqkch"]
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qlg0r"]
+render_priority = 0
+shader = ExtResource("3_dqkch")
+shader_parameter/color_depth = 5
+shader_parameter/dithering = true
+shader_parameter/resolution_scale = 1
 
 [sub_resource type="Animation" id="Animation_i3pqv"]
 length = 0.001
@@ -191,6 +203,7 @@ resource_name = "in_air"
 [sub_resource type="Animation" id="Animation_2hs0m"]
 resource_name = "shoot"
 length = 0.4
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -286,6 +299,30 @@ tracks/7/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(-0.58801085, 0.30644634, 0.1281159), Vector3(-0.588011, 0.30644637, 0.12811586), Vector3(-0.58801085, 0.30644634, 0.1281159)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Head/Camera3D/WeaponRig:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.07, -0.244, -0.228), Vector3(0.07, -0.244, -0.188), Vector3(0.07, -0.244, -0.228)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Head/Camera3D/WeaponRig:rotation")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.008726646, 0, 0), Vector3(0, 0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_hqtel"]
@@ -421,7 +458,7 @@ animation = &"shoot"
 animation = &"sway"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_2hs0m"]
-graph_offset = Vector2(-904.3682, 18.03656)
+graph_offset = Vector2(-691.5232, 156.98631)
 nodes/Idle/node = SubResource("AnimationNodeAnimation_hqtel")
 nodes/Idle/position = Vector2(-400, 60)
 nodes/Walking/node = SubResource("AnimationNodeAnimation_i3pqv")
@@ -468,7 +505,7 @@ skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_onrkg")
 
 [node name="Forearm" type="MeshInstance3D" parent="Head/Camera3D/Arms/Left Arm"]
-transform = Transform3D(0.24737704, -0.92525524, -0.28758982, 0.67918307, 0.3772754, -0.6295818, 0.69102347, -0.03958212, 0.7217474, 0.20853369, 0.06060472, -0.10037905)
+transform = Transform3D(0.24737684, -0.92525524, -0.28758982, 0.6791825, 0.3772754, -0.6295818, 0.69102293, -0.03958212, 0.7217474, 0.20853369, 0.06060472, -0.10037905)
 mesh = SubResource("BoxMesh_onrkg")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_onrkg")
@@ -488,6 +525,12 @@ mesh = SubResource("BoxMesh_onrkg")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_onrkg")
 
+[node name="VFX_Filter" type="MeshInstance3D" parent="Head/Camera3D"]
+cast_shadow = 0
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_dqkch")
+surface_material_override/0 = SubResource("ShaderMaterial_qlg0r")
+
 [node name="Crosshair" type="ColorRect" parent="Head"]
 anchors_preset = 8
 anchor_left = 0.5
@@ -506,6 +549,7 @@ libraries = {
 &"": SubResource("AnimationLibrary_hqtel")
 }
 playback_default_blend_time = 0.6
+speed_scale = 2.0
 blend_times = [&"shoot", &"RESET", 0.5, &"shoot", &"in_air", 0.5, &"shoot", &"shoot", 0.5, &"shoot", &"sprint", 0.5, &"shoot", &"sway", 0.5, &"sway", &"RESET", 0.5, &"sway", &"in_air", 0.5, &"sway", &"shoot", 0.5, &"sway", &"sprint", 0.5, &"sway", &"sway", 0.5]
 
 [node name="Step" type="AudioStreamPlayer" parent="."]
