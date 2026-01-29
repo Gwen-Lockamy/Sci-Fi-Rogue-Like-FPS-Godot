@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://c3frmw520lfqu"]
+
+[ext_resource type="PackedScene" uid="uid://cjnrelch6a05c" path="res://assets/Prototyping Assets/cube5.fbx" id="1_ji6l1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ji6l1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gl8kw"]
+albedo_color = Color(0.2925, 0.30062497, 0.39, 1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ji6l1"]
+points = PackedVector3Array(-0.009561158, -0.009561158, -4.3368087e-19, 0.009262371, 0.009262371, 0.005, 0.009262371, -0.009262371, 0.005, 0.009561158, 0.009561158, -4.3368087e-19, -0.009262371, 0.009262371, 0.005, 0.009561158, -0.009561158, -4.3368087e-19, -0.009561158, 0.009561158, -4.3368087e-19, -0.009262371, -0.009262371, 0.005)
+
+[node name="Ceiling" instance=ExtResource("1_ji6l1")]
+
+[node name="Cube_005" parent="." index="0"]
+transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_ji6l1")
+material_overlay = SubResource("StandardMaterial3D_gl8kw")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_ji6l1")

@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxuy1lha8bwx7"]
+
+[ext_resource type="PackedScene" uid="uid://3trjyhl0v1ao" path="res://assets/Prototyping Assets/wall.fbx" id="1_wykyb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wykyb"]
+albedo_color = Color(0.45882353, 0.47058824, 0.6117647, 1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_wykyb"]
+points = PackedVector3Array(-0.0014714559, 0, 0.038528547, -0.0391222, -0.01, 0.00087780034, -0.0391222, -0.01, 0.0391222, -0.00087780034, -0.01, 0.00087780034, -0.038528547, 0, 0.0014714559, -0.00087780034, -0.01, 0.0391222, -0.038528547, 0, 0.038528547, -0.0014714559, 0, 0.0014714559)
+
+[node name="wall" instance=ExtResource("1_wykyb")]
+
+[node name="Wall" parent="." index="0"]
+transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_wykyb")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_wykyb")

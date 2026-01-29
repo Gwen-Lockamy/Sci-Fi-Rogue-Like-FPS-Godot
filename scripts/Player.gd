@@ -9,6 +9,8 @@ const STEP_INTERVAL = 0.4
 var step_timer = 0
 var gravity = 9.8
 var movement_speed
+var attack_scaling = 1
+var armor = 0
 
 # Camera Juice
 const SENSITIVITY = 0.0015
@@ -17,9 +19,12 @@ const BOB_AMPLITUDE = 0.06
 const FOV_CHANGE = 1.05
 var base_fov = 85
 var time_bob = 0.0
+var default_weapon_pos : Vector3
+@export var weapon_sway_amount : float = 5
+@export var weapon_rotation_amount : float = 1
 
 # Misc
-var bullet = load("res://scenes/blaster_bolt.tscn")
+var bullet = load("res://scenes/bolt.tscn")
 var shoot_blend = 0.0
 var instance
 
@@ -30,7 +35,7 @@ var instance
 @onready var player_animations = $AnimationPlayer
 @onready var gun_animation = $Head/Camera3D/WeaponRig/Blaster/AnimationPlayer
 @onready var gun_barrel = $Head/Camera3D/WeaponRig/Blaster/RayCast3D
-@onready var light = $Head/Camera3D/WeaponRig/Blaster/OmniLight3D
+@onready var light = $Head/Camera3D/WeaponRig/Blaster/"Weapon Vents"/OmniLight3D
 @onready var blaster_sound = $Head/Camera3D/WeaponRig/Blaster/"Blaster Sound"
 @onready var anim_tree = $AnimationTree
 @onready var footstep_audio = $Step
@@ -89,12 +94,13 @@ func handle_shooting(delta):
 		if !gun_animation.is_playing():
 			shoot_blend = 0.8
 			blaster_sound.pitch_scale = randf_range(0.75, 0.85)
-			gun_animation.play("shoot", -1, 2)
+			gun_animation.play("shoot", -1, 1.5)
 
 			instance = bullet.instantiate()
+			instance.owner_body = self
+			get_tree().current_scene.add_child(instance)
 			instance.position = gun_barrel.global_position
 			instance.transform.basis = gun_barrel.global_transform.basis
-			get_parent().add_child(instance)
 
 			
 func handle_movement(direction, input_direction, delta):

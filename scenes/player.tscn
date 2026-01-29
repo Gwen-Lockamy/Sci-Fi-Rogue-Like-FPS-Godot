@@ -1,9 +1,10 @@
-[gd_scene load_steps=23 format=3 uid="uid://uh3x773cfq4r"]
+[gd_scene load_steps=26 format=3 uid="uid://uh3x773cfq4r"]
 
 [ext_resource type="Script" uid="uid://7wpmp33l0bgs" path="res://scripts/Player.gd" id="1_onrkg"]
 [ext_resource type="PackedScene" uid="uid://c1hr1cfxqry7" path="res://scenes/blaster.tscn" id="2_onrkg"]
 [ext_resource type="Shader" uid="uid://4l81ajkdl5ux" path="res://scripts/shaders/PS1-PostProcessing.gdshader" id="3_dqkch"]
-[ext_resource type="AudioStream" uid="uid://da7o5tiemhg7d" path="res://assets/footstep.mp3" id="3_i3pqv"]
+[ext_resource type="AudioStream" uid="uid://da7o5tiemhg7d" path="res://assets/mp3/footstep.mp3" id="3_i3pqv"]
+[ext_resource type="AudioStream" uid="uid://mshjwcqwloss" path="res://assets/mp3/hitmarker.mp3" id="5_qlg0r"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4flbx"]
 
@@ -55,7 +56,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Head/Camera3D/Arms:position")
+tracks/2/path = NodePath("Head/Camera3D/WeaponRig/Arms:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -67,7 +68,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Head/Camera3D/Arms:rotation")
+tracks/3/path = NodePath("Head/Camera3D/WeaponRig/Arms:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -103,7 +104,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Head/Camera3D/Arms/Left Arm/Upper-arm:position")
+tracks/6/path = NodePath("Head/Camera3D/WeaponRig/Arms/Left Arm/Upper-arm:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -115,7 +116,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Head/Camera3D/Arms/Left Arm/Forearm:position")
+tracks/7/path = NodePath("Head/Camera3D/WeaponRig/Arms/Left Arm/Forearm:position")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -127,7 +128,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Head/Camera3D/Arms/Right Arm/Forearm:position")
+tracks/8/path = NodePath("Head/Camera3D/WeaponRig/Arms/Right Arm/Forearm:position")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -139,7 +140,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("Head/Camera3D/Arms/Right Arm/Upperarm:position")
+tracks/9/path = NodePath("Head/Camera3D/WeaponRig/Arms/Right Arm/Upperarm:position")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -151,7 +152,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("Head/Camera3D/Arms/Left Arm/Upper-arm:rotation")
+tracks/10/path = NodePath("Head/Camera3D/WeaponRig/Arms/Left Arm/Upper-arm:rotation")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -163,7 +164,7 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("Head/Camera3D/Arms/Left Arm/Forearm:rotation")
+tracks/11/path = NodePath("Head/Camera3D/WeaponRig/Arms/Left Arm/Forearm:rotation")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
@@ -175,7 +176,7 @@ tracks/11/keys = {
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("Head/Camera3D/Arms/Right Arm/Forearm:rotation")
+tracks/12/path = NodePath("Head/Camera3D/WeaponRig/Arms/Right Arm/Forearm:rotation")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
@@ -187,7 +188,7 @@ tracks/12/keys = {
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("Head/Camera3D/Arms/Right Arm/Upperarm:rotation")
+tracks/13/path = NodePath("Head/Camera3D/WeaponRig/Arms/Right Arm/Upperarm:rotation")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
@@ -200,6 +201,12 @@ tracks/13/keys = {
 [sub_resource type="Animation" id="Animation_sweqy"]
 resource_name = "in_air"
 
+[sub_resource type="Animation" id="Animation_dqkch"]
+resource_name = "look_left"
+
+[sub_resource type="Animation" id="Animation_qlg0r"]
+resource_name = "look_right"
+
 [sub_resource type="Animation" id="Animation_2hs0m"]
 resource_name = "shoot"
 length = 0.4
@@ -207,7 +214,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Head/Camera3D/Arms/Left Arm/Upper-arm:position")
+tracks/0/path = NodePath("Head/Camera3D/WeaponRig/Arms/Left Arm/Upper-arm:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -219,7 +226,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Head/Camera3D/Arms/Left Arm/Forearm:position")
+tracks/1/path = NodePath("Head/Camera3D/WeaponRig/Arms/Left Arm/Forearm:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -231,7 +238,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Head/Camera3D/Arms/Right Arm/Forearm:position")
+tracks/2/path = NodePath("Head/Camera3D/WeaponRig/Arms/Right Arm/Forearm:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -243,7 +250,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Head/Camera3D/Arms/Right Arm/Upperarm:position")
+tracks/3/path = NodePath("Head/Camera3D/WeaponRig/Arms/Right Arm/Upperarm:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -255,7 +262,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Head/Camera3D/Arms/Left Arm/Upper-arm:rotation")
+tracks/4/path = NodePath("Head/Camera3D/WeaponRig/Arms/Left Arm/Upper-arm:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -267,7 +274,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Head/Camera3D/Arms/Left Arm/Forearm:rotation")
+tracks/5/path = NodePath("Head/Camera3D/WeaponRig/Arms/Left Arm/Forearm:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -279,7 +286,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Head/Camera3D/Arms/Right Arm/Forearm:rotation")
+tracks/6/path = NodePath("Head/Camera3D/WeaponRig/Arms/Right Arm/Forearm:rotation")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -291,7 +298,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Head/Camera3D/Arms/Right Arm/Upperarm:rotation")
+tracks/7/path = NodePath("Head/Camera3D/WeaponRig/Arms/Right Arm/Upperarm:rotation")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -310,7 +317,7 @@ tracks/8/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(0.07, -0.244, -0.228), Vector3(0.07, -0.244, -0.188), Vector3(0.07, -0.244, -0.228)]
+"values": [Vector3(0.07, -0.244, -0.228), Vector3(0.07, -0.244, -0.09), Vector3(0.07, -0.244, -0.228)]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
@@ -343,7 +350,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Head/Camera3D/Arms:position")
+tracks/1/path = NodePath("Head/Camera3D/WeaponRig/Arms:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -367,7 +374,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Head/Camera3D/Arms:rotation")
+tracks/3/path = NodePath("Head/Camera3D/WeaponRig/Arms:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -408,7 +415,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Head/Camera3D/Arms:position")
+tracks/2/path = NodePath("Head/Camera3D/WeaponRig/Arms:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -439,6 +446,8 @@ tracks/3/keys = {
 _data = {
 &"RESET": SubResource("Animation_i3pqv"),
 &"in_air": SubResource("Animation_sweqy"),
+&"look_left": SubResource("Animation_dqkch"),
+&"look_right": SubResource("Animation_qlg0r"),
 &"shoot": SubResource("Animation_2hs0m"),
 &"sprint": SubResource("Animation_hqtel"),
 &"sway": SubResource("Animation_onrkg")
@@ -458,7 +467,7 @@ animation = &"shoot"
 animation = &"sway"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_2hs0m"]
-graph_offset = Vector2(-691.5232, 156.98631)
+graph_offset = Vector2(-661.99725, -12.000008)
 nodes/Idle/node = SubResource("AnimationNodeAnimation_hqtel")
 nodes/Idle/position = Vector2(-400, 60)
 nodes/Walking/node = SubResource("AnimationNodeAnimation_i3pqv")
@@ -486,6 +495,7 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
+near = 0.001
 
 [node name="WeaponRig" type="Node3D" parent="Head/Camera3D"]
 transform = Transform3D(0.9999997, 0, 0, 0, 0.9999999, 0, 0, 0, 1.0000004, 0.07049465, -0.24352318, -0.2280075)
@@ -493,33 +503,34 @@ transform = Transform3D(0.9999997, 0, 0, 0, 0.9999999, 0, 0, 0, 1.0000004, 0.070
 [node name="Blaster" parent="Head/Camera3D/WeaponRig" instance=ExtResource("2_onrkg")]
 transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 0, 0, 0)
 
-[node name="Arms" type="Node3D" parent="Head/Camera3D"]
-transform = Transform3D(0.89999986, 0, 0, 0, 0.9, 0, 0, 0, 0.8999995, -0.17140582, -0.27315143, -0.41556716)
+[node name="Arms" type="Node3D" parent="Head/Camera3D/WeaponRig"]
+transform = Transform3D(0.90000015, 0, 0, 0, 0.9000001, 0, 0, 0, 0.8999994, -0.17140582, -0.27315143, -0.41556716)
 
-[node name="Left Arm" type="Node3D" parent="Head/Camera3D/Arms"]
+[node name="Left Arm" type="Node3D" parent="Head/Camera3D/WeaponRig/Arms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.9999989, -0.0736845, 0.24127309, 0.27748448)
 
-[node name="Upper-arm" type="MeshInstance3D" parent="Head/Camera3D/Arms/Left Arm"]
+[node name="Upper-arm" type="MeshInstance3D" parent="Head/Camera3D/WeaponRig/Arms/Left Arm"]
 transform = Transform3D(0.84844434, 0.52920276, -0.00929064, -0.52421445, 0.842612, 0.12330453, 0.07308151, -0.0997468, 0.9923251, 0.1643729, 0.0015959442, 0.1226885)
 mesh = SubResource("BoxMesh_onrkg")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_onrkg")
 
-[node name="Forearm" type="MeshInstance3D" parent="Head/Camera3D/Arms/Left Arm"]
-transform = Transform3D(0.24737684, -0.92525524, -0.28758982, 0.6791825, 0.3772754, -0.6295818, 0.69102293, -0.03958212, 0.7217474, 0.20853369, 0.06060472, -0.10037905)
+[node name="Forearm" type="MeshInstance3D" parent="Head/Camera3D/WeaponRig/Arms/Left Arm"]
+transform = Transform3D(0.24737649, -0.92525524, -0.28758982, 0.6791815, 0.3772754, -0.6295818, 0.69102186, -0.03958212, 0.7217474, 0.20853369, 0.06060472, -0.10037905)
 mesh = SubResource("BoxMesh_onrkg")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_onrkg")
 
-[node name="Right Arm" type="Node3D" parent="Head/Camera3D/Arms"]
-transform = Transform3D(0.99776834, 0.016890142, -0.06459777, -0.0114329625, 0.9964056, 0.08393448, 0.06578312, -0.083008684, 0.994376, 0.015785247, -0.050134346, 0.046147734)
+[node name="Right Arm" type="Node3D" parent="Head/Camera3D/WeaponRig/Arms"]
+transform = Transform3D(0.99776834, 0.016890142, -0.06459777, -0.011432965, 0.9964056, 0.08393448, 0.06578307, -0.08300863, 0.9943754, -0.061956644, 0.2090285, 0.3340767)
 
-[node name="Forearm" type="MeshInstance3D" parent="Head/Camera3D/Arms/Right Arm"]
+[node name="Forearm" type="MeshInstance3D" parent="Head/Camera3D/WeaponRig/Arms/Right Arm"]
 transform = Transform3D(0.929964, 0.032764845, 0.3661859, 0.12836497, 0.90440106, -0.40691677, -0.3445115, 0.42542416, 0.83685404, 0.32292378, 0.05914542, 0.19695926)
 mesh = SubResource("BoxMesh_onrkg")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_onrkg")
 
-[node name="Upperarm" type="MeshInstance3D" parent="Head/Camera3D/Arms/Right Arm"]
+[node name="Upperarm" type="MeshInstance3D" parent="Head/Camera3D/WeaponRig/Arms/Right Arm"]
 transform = Transform3D(0.9242175, -0.28778166, 0.25100523, 0.10630692, 0.8252264, 0.55470693, -0.36677077, -0.48598623, 0.7932819, 0.39804304, 0.07173467, 0.40359068)
 mesh = SubResource("BoxMesh_onrkg")
 skeleton = NodePath("")
@@ -562,3 +573,9 @@ tree_root = SubResource("AnimationNodeBlendTree_2hs0m")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Walk/blend_amount = 0.0
 parameters/Shooting/blend_amount = 0.0
+
+[node name="Hitmarker" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_qlg0r")
+volume_db = -12.0
+pitch_scale = 1.2
+max_polyphony = 10

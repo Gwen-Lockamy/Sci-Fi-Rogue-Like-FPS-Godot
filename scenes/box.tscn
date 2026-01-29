@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://bcbpfjqyqaw4t"]
+
+[ext_resource type="PackedScene" uid="uid://b5aa12e0r5fxp" path="res://assets/Prototyping Assets/box.fbx" id="1_3inec"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3inec"]
+albedo_color = Color(0.61442614, 0.12679672, 0.84765625, 1)
+emission_enabled = true
+emission = Color(0.32421875, 0.0701136, 0.089484535, 1)
+emission_energy_multiplier = 0.2
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_3inec"]
+points = PackedVector3Array(0.01, 0.01, 0.02, 0.01, -0.01, 0.02, 0.01, 0.01, 0, -0.01, 0.01, 0.02, 0.01, -0.01, 0, -0.01, -0.01, 0.02, -0.01, 0.01, 0, -0.01, -0.01, 0)
+
+[node name="box" instance=ExtResource("1_3inec")]
+
+[node name="Box" parent="." index="0"]
+transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_3inec")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_3inec")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+light_color = Color(0.6156863, 0.1254902, 0.84705883, 1)
+light_energy = 2.0
+light_size = 1.0

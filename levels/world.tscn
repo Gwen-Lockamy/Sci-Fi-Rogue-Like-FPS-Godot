@@ -1,7 +1,17 @@
-[gd_scene load_steps=12 format=3 uid="uid://bnbhfgsj7t5v2"]
+[gd_scene load_steps=27 format=3 uid="uid://bnbhfgsj7t5v2"]
 
+[ext_resource type="PackedScene" uid="uid://dye7ydrn440tq" path="res://scenes/target.tscn" id="1_re8x6"]
 [ext_resource type="Script" uid="uid://bx4up8p5jr838" path="res://scripts/world_environment.gd" id="1_tsgde"]
+[ext_resource type="Script" uid="uid://m2v4nunqdu4q" path="res://addons/zylann.hterrain/hterrain.gd" id="2_712nc"]
 [ext_resource type="PackedScene" uid="uid://uh3x773cfq4r" path="res://scenes/player.tscn" id="2_pmfem"]
+[ext_resource type="PackedScene" uid="uid://bvo8lulo8wvla" path="res://scenes/enemy.tscn" id="2_wqmfy"]
+[ext_resource type="Resource" uid="uid://dq3dt6ctc0kr4" path="res://terrain/data.hterrain" id="3_i8ckm"]
+[ext_resource type="Script" uid="uid://ct5ko42lglbgb" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="4_vons5"]
+[ext_resource type="PackedScene" uid="uid://reajw24ouya" path="res://scenes/wall_door.tscn" id="7_687qm"]
+[ext_resource type="PackedScene" uid="uid://5k4j7imc2l8d" path="res://scenes/wall_corner_1.tscn" id="8_lmpr0"]
+[ext_resource type="PackedScene" uid="uid://bxuy1lha8bwx7" path="res://scenes/wall.tscn" id="9_re8x6"]
+[ext_resource type="PackedScene" uid="uid://c3frmw520lfqu" path="res://scenes/ceiling.tscn" id="10_lmpr0"]
+[ext_resource type="PackedScene" uid="uid://bcbpfjqyqaw4t" path="res://scenes/box.tscn" id="11_re8x6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tlwt5"]
 albedo_color = Color(0.5294118, 0.15686275, 0.78431374, 1)
@@ -11,6 +21,20 @@ albedo_color = Color(0.7372549, 0.101960786, 0.078431375, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_036b0"]
 albedo_color = Color(0.105882354, 0.6627451, 0.8745098, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fj7yv"]
+albedo_color = Color(0.99607843, 0.50980395, 0.7647059, 1)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_i8ckm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vons5"]
+albedo_color = Color(0.58488107, 0.5859375, 0.46499774, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_vons5"]
+size = Vector3(3, 2, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vons5"]
+size = Vector3(3, 2, 0.5)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f3sb7"]
 sky_top_color = Color(0.07058324, 0.054146037, 0.09765625, 1)
@@ -29,17 +53,18 @@ tonemap_mode = 2
 tonemap_exposure = 1.2
 ssao_intensity = 16.0
 glow_enabled = true
-glow_bloom = 0.13
+glow_bloom = 0.15
 fog_enabled = true
 fog_mode = 1
 fog_light_color = Color(0.04322917, 0.029166665, 0.046875, 1)
-fog_density = 1.0
+fog_sun_scatter = 0.03
+fog_density = 0.5099
 fog_sky_affect = 0.504
 fog_depth_curve = 0.16493687
 fog_depth_begin = 0.0
 fog_depth_end = 50.0
 volumetric_fog_enabled = true
-volumetric_fog_density = 0.07
+volumetric_fog_density = 0.04
 volumetric_fog_albedo = Color(0.29512778, 0.13038537, 0.671875, 1)
 volumetric_fog_anisotropy = 0.59
 volumetric_fog_detail_spread = 0.5
@@ -49,8 +74,10 @@ adjustment_enabled = true
 adjustment_brightness = 1.1
 adjustment_saturation = 1.4
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fj7yv"]
-albedo_color = Color(0.99607843, 0.50980395, 0.7647059, 1)
+[sub_resource type="Resource" id="Resource_legw5"]
+script = ExtResource("4_vons5")
+mode = 0
+textures = [[], []]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fj7yv"]
 lifetime_randomness = 0.5
@@ -77,50 +104,110 @@ size = Vector3(0.05, 0.05, 0.05)
 
 [node name="Enviornment" type="Node3D" parent="."]
 
-[node name="Small Box" type="CSGBox3D" parent="Enviornment"]
-transform = Transform3D(2, 0, 0, 0, 1.5, 0, 0, 0, 6, 14.9, 0.81758094, 0)
+[node name="Testing Hub" type="Node3D" parent="Enviornment"]
+
+[node name="Small Box" type="CSGBox3D" parent="Enviornment/Testing Hub"]
+transform = Transform3D(2, 0, 0, 0, 1.5, 0, 0, 0, 6, 14.9, 7.59344, 0)
+extra_cull_margin = 2896.29
+ignore_occlusion_culling = true
 use_collision = true
 material = SubResource("StandardMaterial3D_tlwt5")
 
-[node name="Medium Box" type="CSGBox3D" parent="Enviornment"]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 14, 1.5, 6)
+[node name="Medium Box" type="CSGBox3D" parent="Enviornment/Testing Hub"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 14, 8.275859, 6)
+extra_cull_margin = 2896.29
+ignore_occlusion_culling = true
 use_collision = true
 material = SubResource("StandardMaterial3D_aqk2v")
 
-[node name="Large Box" type="CSGBox3D" parent="Enviornment"]
-transform = Transform3D(7.24455, 0, -2.120997, 0, 4, 0, 3.3935952, 0, 4.527844, 11.843324, 2, -8.429459)
+[node name="Large Box" type="CSGBox3D" parent="Enviornment/Testing Hub"]
+transform = Transform3D(0.2590494, 0, -4.016696, 0, 7.7577147, 0, 4.116323, 0, 0.25277957, 11.700063, 7.6202393, -7.3272324)
+extra_cull_margin = 2896.29
+ignore_occlusion_culling = true
 use_collision = true
 material = SubResource("StandardMaterial3D_036b0")
 
-[node name="Large Box2" type="CSGBox3D" parent="Enviornment"]
-transform = Transform3D(-0.26950026, 0, -10.653911, 0, 0.6420366, 0, 18.447025, 0, -0.15564728, 11.7069645, 4.271232, -8.164376)
+[node name="Large Box Cover" type="CSGBox3D" parent="Enviornment/Testing Hub"]
+transform = Transform3D(-0.26950026, 0, -10.653911, 0, 0.6420366, 0, 18.447025, 0, -0.15564728, 11.730951, 11.423356, -8.126872)
+extra_cull_margin = 2896.29
+ignore_occlusion_culling = true
 use_collision = true
 material = SubResource("StandardMaterial3D_036b0")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Enviornment"]
+[node name="Floor" type="CSGBox3D" parent="Enviornment/Testing Hub"]
+transform = Transform3D(200, 0, 0, 0, 0.2, 0, 0, 0, 200, 0.0013797879, 11.409644, -0.0034861565)
+visible = false
+extra_cull_margin = 5.0
+material = SubResource("StandardMaterial3D_fj7yv")
+
+[node name="Target" parent="Enviornment/Testing Hub" instance=ExtResource("1_re8x6")]
+transform = Transform3D(-0.25881913, 0, 0.9659256, 0, 0.9999999, 0, -0.9659257, 0, -0.2588191, 5.224064, 7.7658377, 4.3684983)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Enviornment/Testing Hub"]
+physics_material_override = SubResource("PhysicsMaterial_i8ckm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enviornment/Testing Hub/StaticBody3D"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -8, 8.973534, -1)
+material_override = SubResource("StandardMaterial3D_vons5")
+mesh = SubResource("BoxMesh_vons5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviornment/Testing Hub/StaticBody3D"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -8, 8.973534, -1)
+shape = SubResource("BoxShape3D_vons5")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Enviornment/Testing Hub"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.4051046, 10.947246, 1.0195527)
+light_color = Color(0.63, 0.67316675, 1, 1)
+light_energy = 3.0
+light_volumetric_fog_energy = 3.0
+omni_range = 12.0
+
+[node name="Enemy" parent="Enviornment/Testing Hub" instance=ExtResource("2_wqmfy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 8, 6)
+
+[node name="Globals" type="Node3D" parent="Enviornment"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Enviornment/Globals"]
 environment = SubResource("Environment_tlwt5")
 script = ExtResource("1_tsgde")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Enviornment"]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 6, 23, 0)
-light_color = Color(1, 0.99723786, 0.98895144, 1)
-light_energy = 0.773
-light_indirect_energy = 0.433
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Enviornment/Globals"]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 6, 29.775864, 0)
+light_color = Color(0.926297, 0.96068513, 1, 1)
+light_energy = 0.3
+light_volumetric_fog_energy = 0.529
 light_angular_distance = 3.0
 shadow_enabled = true
 directional_shadow_fade_start = 0.566
 directional_shadow_max_distance = 15.7
 
-[node name="Floor" type="CSGBox3D" parent="Enviornment"]
-transform = Transform3D(200, 0, 0, 0, 0.2, 0, 0, 0, 200, 0.0013797879, 1.0153818, -0.0034861565)
-use_collision = true
-material = SubResource("StandardMaterial3D_fj7yv")
+[node name="HTerrain" type="Node3D" parent="Enviornment/Globals"]
+script = ExtResource("2_712nc")
+ambient_wind = 0.63
+centered = true
+_terrain_data = ExtResource("3_i8ckm")
+chunk_size = 32
+collision_enabled = true
+collision_layer = 1
+collision_mask = 1
+shader_type = "Classic4Lite"
+custom_shader = null
+custom_globalmap_shader = null
+texture_set = SubResource("Resource_legw5")
+render_layers = 1
+cast_shadow = 1
+shader_params/u_ground_uv_scale = 20
+shader_params/u_depth_blending = true
+shader_params/u_triplanar = null
+shader_params/u_tile_reduction = null
+metadata/_custom_type_script = "uid://m2v4nunqdu4q"
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("2_pmfem")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4482307, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13.442144, 0)
 
 [node name="Enviornment Particles" type="GPUParticles3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.4482307, 0)
+extra_cull_margin = 16384.0
 amount = 360
 lifetime = 2.5
 speed_scale = 0.5
@@ -133,3 +220,70 @@ draw_pass_1 = SubResource("BoxMesh_f3sb7")
 [node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="CharacterBody3D/Enviornment Particles"]
 transform = Transform3D(2.0902867, 0, 0, 0, 1, 0, 0, 0, 2.4295232, 0, 0.43132687, 0)
 size = Vector3(10, 1, 10)
+
+[node name="Bunker" type="Node3D" parent="."]
+
+[node name="wall door" parent="Bunker" instance=ExtResource("7_687qm")]
+transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, 0, 7, 9)
+
+[node name="wall corner1" parent="Bunker" instance=ExtResource("8_lmpr0")]
+transform = Transform3D(-0.7071068, 0, 0.7071067, 0, 1, 0, -0.7071067, 0, -0.7071068, 2, 7, 11)
+
+[node name="wall corner2" parent="Bunker" instance=ExtResource("8_lmpr0")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -6, 7, 19)
+
+[node name="wall corner5" parent="Bunker" instance=ExtResource("8_lmpr0")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -12, 7, 21)
+
+[node name="wall corner6" parent="Bunker" instance=ExtResource("8_lmpr0")]
+transform = Transform3D(0.7071067, 0, -0.7071068, 0, 1, 0, 0.7071068, 0, 0.7071067, -17.33306, 7.0000005, 15.610027)
+
+[node name="wall" parent="Bunker" instance=ExtResource("9_re8x6")]
+transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, -2.0473337, 7, 6.9806566)
+
+[node name="wall2" parent="Bunker" instance=ExtResource("9_re8x6")]
+transform = Transform3D(0.7071067, 0, 0.7071068, 0, 1, 0, -0.7071068, 0, 0.7071067, -1.2786007, 7, 12.855007)
+
+[node name="wall4" parent="Bunker" instance=ExtResource("9_re8x6")]
+transform = Transform3D(0.7071067, 0, 0.7071068, 0, 1, 0, -0.7071068, 0, 0.7071067, -8.390179, 7, 15.724241)
+
+[node name="wall5" parent="Bunker" instance=ExtResource("9_re8x6")]
+transform = Transform3D(0.7071067, 0, 0.7071068, 0, 1, 0, -0.7071068, 0, 0.7071067, -12.734931, 7, 11.012577)
+
+[node name="wall corner3" parent="Bunker" instance=ExtResource("8_lmpr0")]
+transform = Transform3D(0.7071069, 0, -0.70710665, 0, 1, 0, 0.70710665, 0, 0.7071069, -15.519067, 7, 9.570005)
+
+[node name="wall corner4" parent="Bunker" instance=ExtResource("8_lmpr0")]
+transform = Transform3D(-0.7071067, 0, -0.7071068, 0, 1, 0, 0.7071068, 0, -0.7071067, -7.5190673, 7, 1.5700049)
+
+[node name="wall3" parent="Bunker" instance=ExtResource("9_re8x6")]
+transform = Transform3D(-0.70710665, 0, -0.7071069, 0, 1, 0, 0.7071069, 0, -0.70710665, -12.240466, 7, 7.7149982)
+
+[node name="Ceiling" parent="Bunker" instance=ExtResource("10_lmpr0")]
+transform = Transform3D(2.828427, 0, 4.2426405, 0, 1, 0, -2.828427, 0, 4.2426405, -6.4938226, 10.270634, 10.172021)
+
+[node name="Ceiling4" parent="Bunker" instance=ExtResource("10_lmpr0")]
+transform = Transform3D(2.4748738, 0, 2.1213202, 0, 1, 0, -2.4748738, 0, 2.1213202, -11.468514, 10.270634, 15.126846)
+
+[node name="Ceiling2" parent="Bunker" instance=ExtResource("10_lmpr0")]
+transform = Transform3D(1.4142135, 0, 3.3941126, 0, 1, 0, -1.4142135, 0, 3.3941126, -4.747278, 10.270634, 8.132203)
+
+[node name="Ceiling3" parent="Bunker" instance=ExtResource("10_lmpr0")]
+transform = Transform3D(1.4142135, 0, 3.8890872, 0, 1, 0, -1.4142135, 0, 3.8890872, -8.777601, 10.270634, 12.402239)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Bunker"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7618276, 10.21809, 7.8917704)
+light_color = Color(0.515625, 0.031145137, 0, 1)
+light_energy = 2.0
+light_volumetric_fog_energy = 3.0
+light_bake_mode = 1
+distance_fade_enabled = true
+distance_fade_begin = 30.0
+distance_fade_shadow = 30.0
+distance_fade_length = 5.0
+omni_range = 12.0
+omni_attenuation = 0.4
+omni_shadow_mode = 0
+
+[node name="box" parent="Bunker" instance=ExtResource("11_re8x6")]
+transform = Transform3D(0.35355338, 0, 0.35355338, 0, 0.5, 0, -0.35355338, 0, 0.35355338, -13.411092, 7.5674243, 17.054081)

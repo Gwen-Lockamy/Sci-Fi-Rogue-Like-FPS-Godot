@@ -1,0 +1,239 @@
+[gd_scene load_steps=23 format=3 uid="uid://bnbhfgsj7t5v2"]
+
+[ext_resource type="Script" uid="uid://c45ip1we53a7" path="res://levels/target.gd" id="1_i8ckm"]
+[ext_resource type="Script" uid="uid://bx4up8p5jr838" path="res://scripts/world_environment.gd" id="1_tsgde"]
+[ext_resource type="Script" uid="uid://m2v4nunqdu4q" path="res://addons/zylann.hterrain/hterrain.gd" id="2_712nc"]
+[ext_resource type="PackedScene" uid="uid://uh3x773cfq4r" path="res://scenes/player.tscn" id="2_pmfem"]
+[ext_resource type="Resource" uid="uid://dq3dt6ctc0kr4" path="res://terrain/data.hterrain" id="3_i8ckm"]
+[ext_resource type="Script" uid="uid://ct5ko42lglbgb" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="4_vons5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tlwt5"]
+albedo_color = Color(0.5294118, 0.15686275, 0.78431374, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aqk2v"]
+albedo_color = Color(0.7372549, 0.101960786, 0.078431375, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_036b0"]
+albedo_color = Color(0.105882354, 0.6627451, 0.8745098, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fj7yv"]
+albedo_color = Color(0.99607843, 0.50980395, 0.7647059, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_712nc"]
+albedo_color = Color(0.609375, 0.609375, 0.609375, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i8ckm"]
+albedo_color = Color(0.61328125, 0.13200405, 0.2101606, 1)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f3sb7"]
+sky_top_color = Color(0.07058324, 0.054146037, 0.09765625, 1)
+sky_horizon_color = Color(0.51562494, 0.28125, 0.625, 1)
+sky_curve = 0.23537485
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0.6842155, 0.6503084, 0.6862745, 1)
+
+[sub_resource type="Sky" id="Sky_fj7yv"]
+sky_material = SubResource("ProceduralSkyMaterial_f3sb7")
+
+[sub_resource type="Environment" id="Environment_tlwt5"]
+background_mode = 2
+sky = SubResource("Sky_fj7yv")
+tonemap_mode = 2
+tonemap_exposure = 1.2
+ssao_intensity = 16.0
+glow_enabled = true
+glow_bloom = 0.15
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.04322917, 0.029166665, 0.046875, 1)
+fog_sun_scatter = 0.03
+fog_density = 0.5099
+fog_sky_affect = 0.504
+fog_depth_curve = 0.16493687
+fog_depth_begin = 0.0
+fog_depth_end = 50.0
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.04
+volumetric_fog_albedo = Color(0.29512778, 0.13038537, 0.671875, 1)
+volumetric_fog_anisotropy = 0.59
+volumetric_fog_detail_spread = 0.5
+volumetric_fog_ambient_inject = 0.83
+volumetric_fog_sky_affect = 0.688
+adjustment_enabled = true
+adjustment_brightness = 1.1
+adjustment_saturation = 1.4
+
+[sub_resource type="Resource" id="Resource_legw5"]
+script = ExtResource("4_vons5")
+mode = 0
+textures = [[], []]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_712nc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vons5"]
+render_priority = 1
+transparency = 4
+albedo_color = Color(0.53999996, 0.71633327, 1, 0.5176471)
+
+[sub_resource type="BoxMesh" id="BoxMesh_legw5"]
+material = SubResource("StandardMaterial3D_vons5")
+size = Vector3(3, 1.5, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_687qm"]
+size = Vector3(3, 2, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fj7yv"]
+lifetime_randomness = 0.5
+emission_shape_offset = Vector3(0, 0, -5)
+emission_shape = 3
+emission_box_extents = Vector3(15, 8, 25)
+direction = Vector3(0, -1, 0)
+spread = 164.84
+flatness = 1.0
+turbulence_enabled = true
+turbulence_noise_strength = 4.58
+turbulence_noise_scale = 4.136
+turbulence_noise_speed_random = 0.63
+turbulence_influence_min = 0.256
+turbulence_influence_max = 0.37
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_f3sb7"]
+size = Vector3(0.05, 0.05, 0.05)
+
+[node name="World" type="Node3D"]
+
+[node name="Enviornment" type="Node3D" parent="."]
+
+[node name="Testing Hub" type="Node3D" parent="Enviornment"]
+
+[node name="Small Box" type="CSGBox3D" parent="Enviornment/Testing Hub"]
+transform = Transform3D(2, 0, 0, 0, 1.5, 0, 0, 0, 6, 14.9, 7.59344, 0)
+extra_cull_margin = 2896.29
+ignore_occlusion_culling = true
+use_collision = true
+material = SubResource("StandardMaterial3D_tlwt5")
+
+[node name="Medium Box" type="CSGBox3D" parent="Enviornment/Testing Hub"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 14, 8.275859, 6)
+extra_cull_margin = 2896.29
+ignore_occlusion_culling = true
+use_collision = true
+material = SubResource("StandardMaterial3D_aqk2v")
+
+[node name="Large Box" type="CSGBox3D" parent="Enviornment/Testing Hub"]
+transform = Transform3D(0.2590494, 0, -4.016696, 0, 7.7577147, 0, 4.116323, 0, 0.25277957, 11.700063, 7.6202393, -7.3272324)
+extra_cull_margin = 2896.29
+ignore_occlusion_culling = true
+use_collision = true
+material = SubResource("StandardMaterial3D_036b0")
+
+[node name="Large Box Cover" type="CSGBox3D" parent="Enviornment/Testing Hub"]
+transform = Transform3D(-0.26950026, 0, -10.653911, 0, 0.6420366, 0, 18.447025, 0, -0.15564728, 11.730951, 11.423356, -8.126872)
+extra_cull_margin = 2896.29
+ignore_occlusion_culling = true
+use_collision = true
+material = SubResource("StandardMaterial3D_036b0")
+
+[node name="Floor" type="CSGBox3D" parent="Enviornment/Testing Hub"]
+transform = Transform3D(200, 0, 0, 0, 0.2, 0, 0, 0, 200, 0.0013797879, 11.409644, -0.0034861565)
+visible = false
+extra_cull_margin = 5.0
+material = SubResource("StandardMaterial3D_fj7yv")
+
+[node name="Target" type="Node3D" parent="Enviornment/Testing Hub"]
+transform = Transform3D(-0.25881907, 0, 0.9659256, 0, 0.9999999, 0, -0.9659257, 0, -0.25881907, 4.224064, 7.7658377, 2.3684983)
+script = ExtResource("1_i8ckm")
+
+[node name="Pole" type="CSGCylinder3D" parent="Enviornment/Testing Hub/Target"]
+transform = Transform3D(1.0000004, 0, -1.7881393e-07, 0, 1, 0, 8.940697e-08, 0, 1.0000004, 0.021609306, 0.4962635, -0.016582012)
+material_override = SubResource("StandardMaterial3D_712nc")
+use_collision = true
+radius = 0.05
+height = 1.0
+
+[node name="Metal" type="CSGCylinder3D" parent="Enviornment/Testing Hub/Target"]
+transform = Transform3D(-2.3755728e-08, 0.5434675, -0.8394306, -1, -4.3711392e-08, -2.2523288e-15, -3.6692693e-08, 0.83943045, 0.5434676, 0.04289937, 0.9852295, 0.01586914)
+material_override = SubResource("StandardMaterial3D_i8ckm")
+use_collision = true
+radius = 0.3
+height = 0.04
+
+[node name="Node2D" type="Node2D" parent="Enviornment/Testing Hub/Target"]
+position = Vector2(967, 511)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Enviornment/Testing Hub"]
+transform = Transform3D(-0.5, 0.61237246, 0.61237246, 0, 0.7071068, -0.7071068, -0.8660254, -0.3535534, -0.3535534, 6.8089194, 10.028927, 0.69076097)
+light_energy = 4.922
+spot_range = 53.212
+spot_attenuation = 1.59
+spot_angle = 180.0
+
+[node name="Globals" type="Node3D" parent="Enviornment"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Enviornment/Globals"]
+environment = SubResource("Environment_tlwt5")
+script = ExtResource("1_tsgde")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Enviornment/Globals"]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 6, 29.775864, 0)
+light_color = Color(0.926297, 0.96068513, 1, 1)
+light_energy = 0.3
+light_volumetric_fog_energy = 0.529
+light_angular_distance = 3.0
+shadow_enabled = true
+directional_shadow_fade_start = 0.566
+directional_shadow_max_distance = 15.7
+
+[node name="HTerrain" type="Node3D" parent="Enviornment/Globals"]
+script = ExtResource("2_712nc")
+ambient_wind = 0.63
+centered = true
+_terrain_data = ExtResource("3_i8ckm")
+chunk_size = 32
+collision_enabled = true
+collision_layer = 1
+collision_mask = 1
+shader_type = "Classic4Lite"
+custom_shader = null
+custom_globalmap_shader = null
+texture_set = SubResource("Resource_legw5")
+render_layers = 1
+cast_shadow = 1
+shader_params/u_ground_uv_scale = 20
+shader_params/u_depth_blending = true
+shader_params/u_triplanar = null
+shader_params/u_tile_reduction = null
+metadata/_custom_type_script = "uid://m2v4nunqdu4q"
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Enviornment"]
+physics_material_override = SubResource("PhysicsMaterial_712nc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enviornment/StaticBody3D"]
+transform = Transform3D(0.25881907, 0, -0.9659258, 0, 1.5, 0, 0.9659258, 0, 0.25881907, 1, 9, 0)
+mesh = SubResource("BoxMesh_legw5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviornment/StaticBody3D"]
+transform = Transform3D(0.25881907, 0, -0.9659258, 0, 1, 0, 0.9659258, 0, 0.25881907, 1, 9, 0)
+shape = SubResource("BoxShape3D_687qm")
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("2_pmfem")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13.442144, 0)
+
+[node name="Enviornment Particles" type="GPUParticles3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.4482307, 0)
+extra_cull_margin = 16384.0
+amount = 360
+lifetime = 2.5
+speed_scale = 0.5
+randomness = 0.8
+draw_order = 3
+trail_lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_fj7yv")
+draw_pass_1 = SubResource("BoxMesh_f3sb7")
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="CharacterBody3D/Enviornment Particles"]
+transform = Transform3D(2.0902867, 0, 0, 0, 1, 0, 0, 0, 2.4295232, 0, 0.43132687, 0)
+size = Vector3(10, 1, 10)

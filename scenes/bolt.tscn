@@ -1,0 +1,127 @@
+[gd_scene load_steps=12 format=3 uid="uid://by1bdll5ojf4a"]
+
+[ext_resource type="Script" uid="uid://csg5paxaroaxc" path="res://scripts/bolt.gd" id="1_gsnt5"]
+[ext_resource type="Texture2D" uid="uid://ckeg8loihnnqt" path="res://assets/footagecrate-scifi-muzzleflash-tubular-front@2X.webp" id="2_hu2p6"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_l28ph"]
+radial_segments = 8
+rings = 4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gsnt5"]
+albedo_color = Color(0.515625, 0.061424077, 0.11154349, 1)
+emission_enabled = true
+emission = Color(0.5137255, 0, 0.101960786, 1)
+emission_energy_multiplier = 16.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hu2p6"]
+size = Vector3(0.2, 2, 0.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s0h4p"]
+albedo_color = Color(0.99905294, 1, 0.34203166, 1)
+emission_enabled = true
+emission = Color(1.18, 1.0034399, 0.3255008, 1)
+emission_energy_multiplier = 7.33
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sws5y"]
+direction = Vector3(0, 0, 1)
+initial_velocity_min = 1.5
+initial_velocity_max = 2.0
+gravity = Vector3(0, -3, 0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jconi"]
+size = Vector3(0.03, 0.03, 0.03)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_s0h4p"]
+particle_flag_rotate_y = true
+emission_shape = 1
+emission_sphere_radius = 0.04
+angle_min = -179.99998
+angle_max = 180.00002
+angular_velocity_min = -50.000015
+angular_velocity_max = 49.99998
+gravity = Vector3(0, 0.3, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8oy20"]
+render_priority = 1
+transparency = 4
+blend_mode = 1
+disable_fog = true
+albedo_color = Color(0.17, 0.02122167, 0.018700002, 0.92941177)
+albedo_texture = ExtResource("2_hu2p6")
+emission_enabled = true
+emission = Color(0.55078125, 0.52732867, 0.18797609, 1)
+emission_energy_multiplier = 0.5
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_sws5y"]
+material = SubResource("StandardMaterial3D_8oy20")
+size = Vector2(0.1, 0.025)
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+script = ExtResource("1_gsnt5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.051440325, 0, 0, 0, 0.03123956, 0, 0, 0, 0.7421891, 0, 0, 0.015815884)
+cast_shadow = 0
+mesh = SubResource("CapsuleMesh_l28ph")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_gsnt5")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="MeshInstance3D"]
+light_color = Color(0.42352942, 0, 0.07058824, 1)
+light_energy = 0.2
+spot_range = 3.0
+spot_attenuation = -6.0
+spot_angle = 90.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.38, 0, 0, 0, -1.6610327e-08, -0.38, 0, 0.38, -1.6610327e-08, 0, 0, 0.015815884)
+shape = SubResource("BoxShape3D_hu2p6")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.3681258)
+material_override = SubResource("StandardMaterial3D_s0h4p")
+cast_shadow = 0
+emitting = false
+lifetime = 0.2
+interp_to_end = 1.0
+one_shot = true
+explosiveness = 0.9
+collision_base_size = 0.0
+process_material = SubResource("ParticleProcessMaterial_sws5y")
+draw_pass_1 = SubResource("BoxMesh_jconi")
+
+[node name="trail" type="GPUParticles3D" parent="."]
+transform = Transform3D(-1, 4.0157926e-11, -8.742276e-08, 0, 0.9999999, 0.00045935318, 8.7422784e-08, 0.00045935318, -0.9999999, 0, 0, -0.3681258)
+visible = false
+cast_shadow = 0
+emitting = false
+amount = 50
+lifetime = 0.1
+interp_to_end = 0.23
+one_shot = true
+speed_scale = 1.23
+randomness = 0.3
+collision_base_size = 0.0
+process_material = SubResource("ParticleProcessMaterial_s0h4p")
+draw_pass_1 = SubResource("QuadMesh_sws5y")
+
+[node name="smoke2" type="GPUParticles3D" parent="."]
+transform = Transform3D(-1, 4.0157926e-11, -8.742276e-08, 0, 0.9999999, 0.00045935318, 8.7422784e-08, 0.00045935318, -0.9999999, 0, 0, -0.3681258)
+cast_shadow = 0
+emitting = false
+amount = 50
+lifetime = 1.5
+speed_scale = 1.23
+randomness = 0.3
+collision_base_size = 0.0
+process_material = SubResource("ParticleProcessMaterial_s0h4p")
+draw_pass_1 = SubResource("QuadMesh_sws5y")
